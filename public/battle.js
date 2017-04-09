@@ -47,7 +47,7 @@ app.controller("BattleController", function ($scope) {
      * @param y
      * @param [isUser]
      */
-    $scope.shoot = function (x, y, isUser) {
+    $scope.fire = function (x, y, isUser) {
         isUser = isUser || false;
         var currentId = x + 'x' + y;
         // if ships was not placed or user or AI wants to fire an own ship
@@ -122,8 +122,8 @@ app.controller("BattleController", function ($scope) {
     };
 
     /**
-     * Marks ship fired
-     * @param id
+     * Marks ship fired and saves player and AI fire history
+     * @param id ship id (x + 'x' + y = 10x9)
      * @param isUser
      */
     function makeShipFired(id, isUser) {
@@ -141,7 +141,7 @@ app.controller("BattleController", function ($scope) {
     }
 
     /**
-     * Random AI fire except already fired cell and own ships.
+     * Randomly AI fire. Already fired cells and own ships should be ignored.
      */
     $scope.shootAI = function () {
         $scope.AIFired = true;
@@ -151,12 +151,12 @@ app.controller("BattleController", function ($scope) {
             x = rand(0, $scope.size);
             y = rand(0, $scope.size);
         }
-        $scope.shoot(x, y);
+        $scope.fire(x, y);
         $scope.AIFired = false;
     };
 
     /**
-     *
+     * Checks if AI can fire on selected cell
      * @param x
      * @param y
      * @returns {boolean}
@@ -167,7 +167,7 @@ app.controller("BattleController", function ($scope) {
     };
 
     /**
-     *
+     * Checks if player can fire on selected cell
      * @param x
      * @param y
      * @returns {boolean}
@@ -195,8 +195,8 @@ app.controller("BattleController", function ($scope) {
     /**
      * Place player or AI ships
      *
-     * @param player
-     * @param showOnBoard
+     * @param player A (AI) or U (User)
+     * @param showOnBoard use to show ships on a board
      */
     $scope.randomPlaceShips = function(player, showOnBoard = true) {
         for (var i = 0; i < $scope.ships.length; i++) {
@@ -237,7 +237,7 @@ app.controller("BattleController", function ($scope) {
     };
 
     /**
-     * Randomly generates x, y and orientation to place a ship
+     * Randomly generates x, y and orientation to place a ship shipSize size
      *
      * @param shipSize
      * @returns {{start_x: number, start_y: number, orientation: boolean}}

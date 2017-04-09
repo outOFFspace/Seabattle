@@ -16,7 +16,7 @@
     <table>
         <tbody>
             <tr ng-repeat="row in grid track by $index">
-                <td ng-repeat="cell in row track by $index" id="{{$parent.$index}}x{{$index}}" ng-click="shoot($parent.$index, $index, true)"></td>
+                <td ng-repeat="cell in row track by $index" id="{{$parent.$index}}x{{$index}}" ng-click="fire($parent.$index, $index, true)"></td>
             </tr>
         </tbody>
     </table>

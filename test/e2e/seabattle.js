@@ -16,6 +16,6 @@ describe('Seabattle App', function () {
     it('should click on cell', function () {
         element.all(by.css('table td:not(.act):not(.ai_act):not(.fired):not(.ai_fired)')).first().click();
         var until = protractor.ExpectedConditions;
-        browser.wait(until.presenceOf(element(by.css('table td.ai_act'))), 2000, 'Element taking too long to appear in the DOM');
+        browser.wait(until.presenceOf(element(by.css('table td.ai_act'))), 1000, 'Element taking too long to appear in the DOM');
     });
 });
