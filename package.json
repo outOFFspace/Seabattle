@@ -1,0 +1,40 @@
+{
+  "name": "seabattle",
+  "version": "1.0.0",
+  "description": "Coffee+Angular Seabattle game",
+  "main": "index.js",
+  "scripts": {
+    "postinstall": "bower install",
+    "prestart": "npm install",
+    "update-deps": "npm update",
+    "postupdate-deps": "bower update",
+    "start": "node index.js",
+    "test": "karma start karma.conf.js",
+    "test-single-run": "karma start karma.conf.js --single-run",
+    "preupdate-webdriver": "npm install",
+    "update-webdriver": "webdriver-manager update",
+    "preprotractor": "npm run update-webdriver",
+    "protractor": "protractor protractor.conf.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "jasmine-core": "^2.5.2",
+    "karma": "^1.6.0",
+    "karma-chrome-launcher": "^2.0.0",
+    "karma-jasmine": "^1.1.0",
+    "mocha": "^3.2.0",
+    "should": "^11.2.1",
+    "protractor": "^4.0.9"
+  },
+  "dependencies": {
+    "angularjs": "0.0.1",
+    "async": "^2.3.0",
+    "coffee-script": "^1.12.4",
+    "karma-jasmine": "^1.1.0",
+    "karma-junit-reporter": "^1.2.0",
+    "karma-phantomjs-launcher": "^1.0.4",
+    "koa-static": "^3.0.0",
+    "koa-views": "^6.0.1"
+  }
+}

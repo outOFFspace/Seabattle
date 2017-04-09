@@ -1,0 +1,28 @@
+<!doctype html>
+<html ng-app="seabattle">
+<head>
+    <title>Seabattle Awesome Game</title>
+    <script src="//searls.github.com/jasmine-all/jasmine-all-min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.3/angular.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.3/angular-route.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.3/angular-resource.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.3/angular-mocks.js"></script>
+    <link href="/public/battle.css" rel="stylesheet" type="text/css">
+    <script src="/public/battle.js"></script>
+</head>
+<body>
+<h2>Seabattle</h2>
+<div class="arena" ng-controller="BattleController">
+    <table>
+        <tbody>
+            <tr ng-repeat="row in grid track by $index">
+                <td ng-repeat="cell in row track by $index" id="{{$parent.$index}}x{{$index}}" ng-click="shoot($parent.$index, $index, true)"></td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="hide loading" id="loader">AI shooting...</div>
+    <div class="hide loading" id="endgame"></div>
+    <a ng-click="startGame()" id="startBtn" class="start">Crash them all!</a>
+</div>
+</body>
+</html>
