@@ -52,24 +52,13 @@ describe('BattleController', function () {
             expect($scope.grid.length).toEqual($scope.size);
         });
 
-        it('AI should kill whole ship', function () {
-            $scope.initGrid();
-            $scope.grid[0][15] = 'U';
-            $scope.grid[0][16] = 'U';
-            //$scope.grid[9][6] = 'U';
-            //$scope.grid[9][7] = 'U';
-            //$scope.grid[9][8] = 'U';
-            //$scope.grid[9][9] = 'U';
-            //$scope.grid[9][10] = 'U';
-            //$scope.grid[9][11] = 'U';
-            //$scope.grid[9][12] = 'U';
-            //$scope.grid[9][13] = 'U';
-            var x = 0, y = 15;
+        function markCells(x, y) {
             if ($scope.grid[x] && $scope.grid[x][y] && $scope.grid[x][y] == 'U') {
                 $scope.grid[x][y] = 'X';
                 var run = true;
                 for (let i = 1, j = -1; run; i++, j--) {
                     let id = null;
+                    console.log('$scope.grid[x][y + i]', x + i, y);
                     if ($scope.grid[x + i] && $scope.grid[x + i][y] == 'U') {
                         $scope.grid[x + i][y] = 'X';
                     }
@@ -84,7 +73,6 @@ describe('BattleController', function () {
                 run = true;
                 for (let i = 1, j = -1; run; i++, j--) {
                     let id = null;
-                    console.log($scope.grid[x][y + i], 'x + i', x, y + i);
                     if ($scope.grid[x][y + i] && $scope.grid[x][y + i] == 'U') {
                         id = x + 'x' + (y + i);
                         $scope.grid[x][y + i] = 'X';
@@ -98,19 +86,34 @@ describe('BattleController', function () {
                     }
                 }
             }
-            expect($scope.grid[0][15]).toEqual('X');
-            expect($scope.grid[0][15]).toEqual('X');
-            //expect($scope.grid[9][5]).toEqual('X');
-            //expect($scope.grid[9][6]).toEqual('X');
-            //expect($scope.grid[9][7]).toEqual('X');
-            //expect($scope.grid[9][8]).toEqual('X');
-            //expect($scope.grid[9][9]).toEqual('X');
-            //expect($scope.grid[9][10]).toEqual('X');
-            //expect($scope.grid[9][11]).toEqual('X');
-            //expect($scope.grid[9][12]).toEqual('X');
-            //expect($scope.grid[9][13]).toEqual('X');
-            //expect($scope.grid[9][14]).toEqual('O');
-            console.table($scope.grid);
+        }
+
+        it('AI should kill whole horizontal oriented ship', function () {
+            $scope.initGrid();
+            var x = 9, y = 9;
+            for (let i = 4; i < 14; i++) {
+                $scope.grid[x][i] = 'U';
+            }
+            markCells(x, y);
+            expect($scope.grid[x][3]).toEqual('O');
+            for (let i = 4; i < 14; i++) {
+                expect($scope.grid[x][i]).toEqual('X');
+            }
+            expect($scope.grid[x][14]).toEqual('O');
+        });
+
+        it('AI should kill whole vertical oriented ship', function () {
+            $scope.initGrid();
+            var x = 3, y = 6;
+            for (let i = 1; i < 7; i++) {
+                $scope.grid[i][y] = 'U';
+            }
+            markCells(x, y);
+            expect($scope.grid[0][y]).toEqual('O');
+            for (let i = 1; i < 7; i++) {
+                expect($scope.grid[i][y]).toEqual('X');
+            }
+            expect($scope.grid[8][y]).toEqual('O');
         });
 
         it('should User placeShips', function () {
