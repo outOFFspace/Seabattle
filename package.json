@@ -16,16 +16,17 @@
     "preprotractor": "npm run update-webdriver",
     "protractor": "protractor protractor.conf.js"
   },
-  "author": "",
+  "author": "Vovchuk Bogdan <vovchuck.bogdan@gmail.com>",
   "license": "ISC",
   "devDependencies": {
     "jasmine-core": "^2.5.2",
     "karma": "^1.6.0",
     "karma-chrome-launcher": "^2.0.0",
+    "karma-firefox-launcher": "^1.0.1",
     "karma-jasmine": "^1.1.0",
     "mocha": "^3.2.0",
-    "should": "^11.2.1",
-    "protractor": "^4.0.9"
+    "protractor": "^4.0.9",
+    "should": "^11.2.1"
   },
   "dependencies": {
     "angularjs": "0.0.1",
