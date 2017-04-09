@@ -1,6 +1,6 @@
 {
-  "name": "seabattle",
-  "description": "Coffee+Angular Seabattle game",
+  "name": "Seabattle",
+  "description": "Koa2+Angular Seabattle game",
   "main": "index.js",
   "authors": [
     "howard <vovchuck.bogdan@gmail.com>"

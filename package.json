@@ -1,7 +1,7 @@
 {
   "name": "seabattle",
-  "version": "1.0.0",
-  "description": "Coffee+Angular Seabattle game",
+  "version": "0.0.1",
+  "description": "Koa2+Angular Seabattle game",
   "main": "index.js",
   "scripts": {
     "postinstall": "bower install",
