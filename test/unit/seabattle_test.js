@@ -121,11 +121,6 @@ describe('BattleController', function () {
             expect($scope.playerShipsCoords.length).toEqual(26);
         });
 
-        it('should User placeShips', function () {
-            placeShips('U');
-            expect($scope.playerShipsCoords.length).toEqual(26);
-        });
-
         it('should AI placeShips', function () {
             placeShips('A');
             expect($scope.AIShipsCoords.length).toEqual(26);
