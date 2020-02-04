@@ -1,6 +1,6 @@
 var app = angular.module('seabattle', ['ngRoute']);
 
-app.controller("BattleController", function ($scope) {
+app.controller('BattleController', function($scope) {
     $scope.size = 20;
     $scope.grid = [];
     $scope.ships = [[10, 1], [5, 2], [2, 3]];
@@ -34,7 +34,7 @@ app.controller("BattleController", function ($scope) {
      * Init board
      */
     $scope.initGrid = function() {
-        for (var i = 0; i < $scope.size; i++) {
+        for (let i = 0; i < $scope.size; i++) {
             $scope.grid[i] = Array($scope.size).fill('O');
         }
     };
@@ -47,7 +47,7 @@ app.controller("BattleController", function ($scope) {
      * @param y
      * @param [isUser]
      */
-    $scope.fire = function (x, y, isUser) {
+    $scope.fire = function(x, y, isUser) {
         isUser = isUser || false;
         var currentId = x + 'x' + y;
         // if ships was not placed or user or AI wants to fire an own ship
@@ -143,7 +143,7 @@ app.controller("BattleController", function ($scope) {
     /**
      * Randomly AI fire. Already fired cells and own ships should be ignored.
      */
-    $scope.shootAI = function () {
+    $scope.shootAI = function() {
         $scope.AIFired = true;
         var x = rand(0, $scope.size);
         var y = rand(0, $scope.size);
@@ -183,13 +183,13 @@ app.controller("BattleController", function ($scope) {
     /**
      * Randomly place Player and AI ships at a grid arena
      */
-    $scope.startGame = function () {
+    $scope.startGame = function() {
         $scope.clearGrid();
         $scope.initGrid();
         $scope.randomPlaceShips('U');
         $scope.randomPlaceShips('A', false);
         $scope.gameStarted = true;
-        console.table($scope.grid);
+        // console.table($scope.grid);
     };
 
     /**
@@ -199,8 +199,8 @@ app.controller("BattleController", function ($scope) {
      * @param showOnBoard use to show ships on a board
      */
     $scope.randomPlaceShips = function(player, showOnBoard = true) {
-        for (var i = 0; i < $scope.ships.length; i++) {
-            for (var j = 0; j < $scope.ships[i][1]; j++) {
+        for (let i = 0; i < $scope.ships.length; i++) {
+            for (let j = 0; j < $scope.ships[i][1]; j++) {
                 var shipSize = $scope.ships[i][0];
                 var shipPlacement = $scope.findPlaceOnBoard(shipSize);
                 while (!$scope.checkForSafePlacement(shipSize, shipPlacement.start_x, shipPlacement.start_y, shipPlacement.orientation)) {
@@ -211,7 +211,7 @@ app.controller("BattleController", function ($scope) {
                 var startY = shipPlacement.start_y;
                 var startX = shipPlacement.start_x;
 
-                for (var k = 0; k < shipSize; k++) {
+                for (let k = 0; k < shipSize; k++) {
                     if (!orientation) {
                         $scope.grid[startX][startY + k] = player;
                         let id = startX + 'x' + (startY + k);
@@ -246,7 +246,7 @@ app.controller("BattleController", function ($scope) {
         if (shipSize > $scope.size) {
             throw new Error('shipSize cannot be greater that board size');
         }
-        var orientation = Math.round($scope.size * Math.random()) % 2 == 0;
+        var orientation = Math.round($scope.size * Math.random()) % 2 === 0;
         var startX = 0;
         var startY = 0;
         var maxStartCoord = ($scope.grid[0].length) - shipSize;
@@ -261,7 +261,7 @@ app.controller("BattleController", function ($scope) {
             startY = rand(0, maxStartCoord);
         }
 
-        return {start_x: startX, start_y: startY, orientation: orientation};
+        return {start_x: startX, start_y: startY, orientation};
     };
 
     /**
@@ -275,9 +275,9 @@ app.controller("BattleController", function ($scope) {
      * @returns {boolean}
      */
     $scope.checkForSafePlacement = function (shipSize, startX, startY, orientation) {
-        for (var i = 0; i < shipSize; i++) {
+        for (let i = 0; i < shipSize; i++) {
             // make sure that there are no nearest ships
-            if ($scope.grid[startX][startY] != 'O') {
+            if ($scope.grid[startX][startY] !== 'O') {
                 return false;
             }
             if (!orientation) {
@@ -292,7 +292,7 @@ app.controller("BattleController", function ($scope) {
                 }
             } else {
                 if (!$scope.grid[startX + i]
-                    || $scope.grid[startX + i][startY] != 'O'
+                    || $scope.grid[startX + i][startY] !== 'O'
                     || ($scope.grid[startX + i][startY + 1] && $scope.grid[startX + i][startY + 1] != 'O')
                     || ($scope.grid[startX + i][startY - 1] && $scope.grid[startX + i][startY - 1] != 'O')
                     || ($scope.grid[startX + i + 1] && $scope.grid[startX + i + 1][startY] != 'O')
@@ -314,10 +314,9 @@ app.controller("BattleController", function ($scope) {
      * @returns {*}
      */
     function rand(min, max) {
-        if (min == 0) {
+        if (min === 0) {
             return Math.floor((Math.random() * max));
-        } else {
-            return Math.floor(Math.random() * (max - min + 1)) + min;
         }
+        return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 });
